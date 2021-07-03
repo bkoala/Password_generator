@@ -16,69 +16,85 @@ function generatePassword(){
   //Basic alphatetic characters
   var useChars="abcdefghijklimnopqrstuvwxyz";
   //Prompt user for password length until correct value is entered or user cancel program
-  var passLength =window.prompt("Please select the length of your password-From 8 to 128");
+  var passLength =window.prompt("Please select the length of your password-From 8 to 128", " ");
  if (passLength){
-  while (isNaN(passLength) || passLength < 8 || passLength > 128 ) {
-    var passLength =window.prompt("Please enter a valid number  from 8 to 128");
+  while (isNaN(passLength) || passLength < 8 || passLength > 128  || (passLength === " ")) {
+    var passLength =window.prompt("Please enter a valid number  from 8 to 128"," "); 
+    if(!passLength) { //User pressed Cancel 
+      alert("You terminated the program");
+     return;}
   }
-} else { alert("You terminated the program");
+} else { //User cancelled the program by pushing the cancel button
+     alert("You terminated the program");
    return;
    }
   //Prompt user for lower case choice until right answer is entered or exits
- var pasL =window.prompt("Do you want to include a lower case in your password? yes or no" );
+ var pasL =window.prompt("Do you want to include a lower case in your password? yes or no"," ");
  if (pasL){ 
   pasL = pasL.toLowerCase();
-  while (pasL !== "yes" && pasL !== "no") {
-    var pasL =window.prompt("Please enter a valid answer for lower case; yes or no");
+  while ((pasL !== "yes" && pasL !== "no") || (pasL === " ")) {
+    var pasL =window.prompt("Please enter a valid answer for lower case; yes or no"," ");
+    if(!pasL) { //User pressed Cancel 
+      alert("You terminated the program");
+     return;}
   }
 } else { alert("You terminated the program");
    return;
    }
 //Prompt user for Upper case choice until right answer is entered or exits
-var pasU =window.prompt("Do you want to include a upper case in your password? yes or no" );
+var pasU =window.prompt("Do you want to include a upper case in your password? yes or no"," ");
 if (pasU){ 
   pasU = pasU.toLowerCase();
- while (pasU !== "yes" &&  pasU !== "no") {
-   var pasU =window.prompt("Please enter a valid answer for your upper case; yes or no");
+ while ((pasU !== "yes" &&  pasU !== "no") || (pasU === " ")) {
+   var pasU =window.prompt("Please enter a valid answer for your upper case; yes or no"," ");
+   if(!pasU) { //User pressed Cancel 
+    alert("You terminated the program");
+   return;}
  }
 } else { alert("You terminated the program");
   return;
   }
  //Prompt user for number choice until right answer is entered or exits
- var pasN =window.prompt("Do you want to include one number in your password? yes or no");
+ var pasN =window.prompt("Do you want to include one number in your password? yes or no"," ");
 if (pasN){ 
   pasN = pasN.toLowerCase();
- while (pasN !== "yes" && pasN !== "no") {
-   var pasN =window.prompt("Please enter a valid answer for number. yes or no");
+ while ((pasN !== "yes" && pasN !== "no") || (pasN === " ")) {
+   var pasN =window.prompt("Please enter a valid answer for number. yes or no"," ");
+   if(!pasN) { //User pressed Cancel  button
+    alert("You terminated the program");
+   return;}
  }
 } else { alert("You terminated the program");
   return;
   } 
 //Prompt user for special character choice until right answer is entered for special character
  
-var pasS =window.prompt("Do you want to include one special character in your password? yes or no");
+var pasS =window.prompt("Do you want to include one special character in your password? yes or no","");
     
 if (pasS){ 
   pasS = pasS.toLowerCase();
- while (pasS !== "yes" && pasS !== "no") {
-   var pasS =window.prompt("Please enter a valid answer for special character. yes or no");
+ while ((pasS !== "yes" && pasS !== "no") || (pasS === " "))  {
+   var pasS =window.prompt("Please enter a valid answer for special character. yes or no"," ");
+   if(!pasS) { //User pressed Cancel button
+    alert("You terminated the program");
+   return;}
  }
-} else { alert("You terminated the program");
+} else { alert("You terminated the program"); //User pressed Cancel button
   return;
   } 
   
-  // Make Modification to pool of characaters based on user criteria 
+  // Make Modification to pool of characaters for random password generation based on user criteria 
   //No lower cases
     if (  pasL ==="no") {
     Lcase="abcdefghijklimnopqrstuvwxyz";
     useChars= Lcase.toUpperCase();
   }
-  //Upper cases included in pool
+  //Upper cases included in pool when user chooses to do so
   if ( pasU==="yes" ){
     Lcase="abcdefghijklimnopqrstuvwxyz";
     useChars= useChars +  Lcase.toUpperCase();
   }
-  //Special characters included in pool
+  //Special characters included in pool when user chooses yes
   if ( pasS === "yes" ){
   useChars= useChars + "!#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
 }
@@ -96,7 +112,6 @@ function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
   passwordText.value = password;
-
 }
 
 // Add event listener to generate button
